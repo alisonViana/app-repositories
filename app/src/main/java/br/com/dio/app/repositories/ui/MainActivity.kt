@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import br.com.dio.app.repositories.R
 import br.com.dio.app.repositories.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -20,4 +20,26 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        Log.i(TAG, "$query")
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        Log.i(TAG, "$newText")
+        return false
+    }
+
+    companion object {
+        const val TAG = "TAG"
+    }
 }
