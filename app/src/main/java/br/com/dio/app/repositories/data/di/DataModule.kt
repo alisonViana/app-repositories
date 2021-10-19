@@ -56,6 +56,8 @@ object DataModule {
     private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
+            .client(client)
+            .addConverterFactory(factory)
             .build()
             .create(T::class.java)
     }
