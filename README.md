@@ -1,4 +1,4 @@
-# Github Repositories <img src="https://github.com/alisonViana/app-repositories-bootcampInter/blob/master/images/app_icon.png" alt="ícone" width="48" height="48" />
+# Github Repositories <img src="https://github.com/alisonViana/app-repositories-bootcampInter/blob/master/images/icon.png" alt="ícone" width="48" height="48" />
 
 Olá, este é o repositório do meu aplicativo Github Repositories, projeto desenvolvido para o Bootcamp Android Developer oferecido pela Digital Innovation One em parceria com o Inter. O aplicativo consiste em um visualizador de repositórios do github do usuário pesquisado. Ele traz, em forma de cartões, as principais informações, como o nome do repositório, a descrição resumida, a linguagem de programação e as estrelas recebidas. A partir daí, é possível selecionar um repositório específico e abrir suas informações mais detalhadas, incluindo um link que leva direto para a página do Github do repositório. 
 
