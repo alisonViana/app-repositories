@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailActivity">
+
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_padding"
+        android:background="?attr/actionBarItemBackground"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/iv_owner"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="@dimen/layout_half_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_close"
+        tools:background="@tools:sample/avatars"
+        />
+
+    <TextView
+        android:id="@+id/tv_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_half_padding"
+        android:layout_marginTop="4dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_owner"
+        tools:text="userName" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_owner"
+        app:cardCornerRadius="@dimen/layout_half_padding"
+        android:elevation="@dimen/layout_half_padding"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/layout_half_padding">
+
+            <TextView
+                android:id="@+id/tv_repo_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@sample/repositories.json/data/name" />
+
+            <TextView
+                android:id="@+id/tv_repo_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_half_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_repo_name"
+                tools:text="@sample/repositories.json/data/description" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_watchers"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginTop="@dimen/layout_extra_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_repo_description"
+                app:layout_constraintBottom_toTopOf="@id/tv_repo_link"
+                app:chipIcon="@drawable/ic_watchers"
+                app:chipIconTint="@android:color/holo_orange_light"
+                tools:text="@sample/repositories.json/data/stargazers_count" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_star"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="@dimen/layout_padding"
+                app:chipIcon="@drawable/ic_stars"
+                app:chipIconTint="@android:color/holo_orange_light"
+                app:layout_constraintBottom_toBottomOf="@id/chip_watchers"
+                app:layout_constraintStart_toEndOf="@id/chip_watchers"
+                app:layout_constraintTop_toTopOf="@id/chip_watchers"
+                tools:text="@sample/repositories.json/data/stargazers_count" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_forks"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="@dimen/layout_padding"
+                app:chipIcon="@drawable/ic_fork"
+                app:chipIconTint="@android:color/holo_orange_light"
+                app:layout_constraintBottom_toBottomOf="@id/chip_watchers"
+                app:layout_constraintStart_toEndOf="@id/chip_star"
+                app:layout_constraintTop_toTopOf="@id/chip_watchers"
+                tools:text="@sample/repositories.json/data/stargazers_count" />
+
+            <TextView
+                android:id="@+id/tv_repo_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/chip_star"
+                app:layout_constraintBottom_toBottomOf="@id/chip_star"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@sample/repositories.json/data/language" />
+
+
+            <TextView
+                android:id="@+id/tv_repo_link"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_extra_padding"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:textColorLink="@android:color/holo_blue_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chip_star"
+                tools:text="@sample/repositories.json/data/html_url" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

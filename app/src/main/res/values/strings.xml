@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">App Repositories</string>
+    <string name="app_name">GitHub Repositories</string>
     <string name="action_search">Pesquisar</string>
+    <string name="label_initial">
+        Utilize a barra de pesquisa, ali em cima, para pesquisar os repositórios de algum usuário
+        do Github!
+    </string>
+    <string name="label_repo_empty">
+        Hmmm... Parece que o repositório está vazio :/
+    </string>
 </resources>

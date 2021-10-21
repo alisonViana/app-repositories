@@ -1,16 +1,22 @@
 package br.com.dio.app.repositories.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ShareCompat
+import androidx.core.view.isEmpty
 import br.com.dio.app.repositories.R
 import br.com.dio.app.repositories.core.createDialog
 import br.com.dio.app.repositories.core.createProgressDialog
 import br.com.dio.app.repositories.core.hideSoftKeyboard
 import br.com.dio.app.repositories.databinding.ActivityMainBinding
 import br.com.dio.app.repositories.presentation.MainViewModel
+import br.com.dio.app.repositories.ui.DetailActivity.Companion.REPO_EXTRA
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
@@ -25,6 +31,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        setMessage(R.string.label_initial)
+        setListeners()
+
         binding.rvRepoList.adapter = adapter
 
         viewModel.repos.observe(this){
@@ -38,8 +47,24 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
                 is MainViewModel.State.Success -> {
                     dialog.dismiss()
+                    binding.tvMessages.visibility = View.INVISIBLE
+                    if (it.list.isEmpty()) setMessage(R.string.label_repo_empty)
                     adapter.submitList(it.list)
                 }
+            }
+        }
+    }
+
+    private fun setMessage(message: Int) {
+        binding.tvMessages.setText(message)
+        binding.tvMessages.visibility = View.VISIBLE
+    }
+
+    private fun setListeners() {
+        adapter.clickListener = {
+            Intent(this, DetailActivity::class.java).apply {
+                putExtra(REPO_EXTRA, it)
+                startActivity(this)
             }
         }
     }

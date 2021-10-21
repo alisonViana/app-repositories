@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 
 class RepoListAdapter: ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallBack()) {
 
+    var clickListener: (Repo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -32,6 +33,9 @@ class RepoListAdapter: ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallBac
             binding.tvRepoDescription.text = item.description
             binding.tvRepoLanguage.text = item.language
             binding.chipStar.text = item.stargazersCount.toString()
+            binding.cardRepoItem.setOnClickListener {
+                clickListener(item)
+            }
 
             Glide.with(binding.root.context)
                 .load(item.owner.avatarURL)
