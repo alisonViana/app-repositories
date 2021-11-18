@@ -6,6 +6,13 @@
         do Github!
     </string>
     <string name="label_repo_empty">
-        Hmmm... Parece que o repositório está vazio :/
+        Hmmm… Parece que o repositório está vazio :/
     </string>
+
+    <string name="favorites_number">Favoritos (%1$d)</string>
+
+    <string name="delete_dialog_title">Adicionar aos favoritos?</string>
+    <string name="delete_dialog_message">Deseja adicionar o usuário %1$s aos favoritos?</string>
+    <string name="delete_dialog_positive">Sim</string>
+    <string name="delete_dialog_negative">Não</string>
 </resources>

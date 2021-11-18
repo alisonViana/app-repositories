@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 class RepoListAdapter: ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallBack()) {
 
     var clickListener: (Repo) -> Unit = {}
+    var longClickListener: (Repo) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -35,6 +36,10 @@ class RepoListAdapter: ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallBac
             binding.chipStar.text = item.stargazersCount.toString()
             binding.cardRepoItem.setOnClickListener {
                 clickListener(item)
+            }
+            binding.cardRepoItem.setOnLongClickListener {
+                longClickListener(item)
+                true
             }
 
             Glide.with(binding.root.context)

@@ -1,12 +1,15 @@
 package br.com.dio.app.repositories.data.di
 
 import android.util.Log
+import br.com.dio.app.repositories.data.database.FavoriteDatabase
+import br.com.dio.app.repositories.data.repositories.FavoriteRepository
 import br.com.dio.app.repositories.data.repositories.RepoRepository
 import br.com.dio.app.repositories.data.repositories.RepoRepositoryInterface
 import br.com.dio.app.repositories.data.services.GitHubService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -19,6 +22,7 @@ object DataModule {
 
     fun load() {
         loadKoinModules(networkModules()
+                + daoModule()
                 + repositoriesModules())
     }
 
@@ -50,6 +54,13 @@ object DataModule {
     private fun repositoriesModules(): Module {
         return module {
             single<RepoRepositoryInterface> {RepoRepository(get())}
+            single { FavoriteRepository(get()) }
+        }
+    }
+
+    private fun daoModule(): Module {
+        return module {
+            single { FavoriteDatabase.getInstance(androidContext()).favoriteDao }
         }
     }
 
