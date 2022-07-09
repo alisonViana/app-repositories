@@ -69,6 +69,23 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             binding.bottomSheetLayout.tvFavoriteTitle.text =
                 String.format(getString(R.string.favorites_number), it.size)
         }
+
+        val bottomSheetCallBack = object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                // when have a new state
+                Log.i(TAG, "novo estado: $newState")
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // when slide the bottomSheet
+                Log.i(TAG, "slide: $slideOffset")
+                if (slideOffset > 0.5)
+                    binding.bottomSheetLayout.btnFavoriteIcon.setImageResource(R.drawable.ic_arrow_down)
+                else
+                    binding.bottomSheetLayout.btnFavoriteIcon.setImageResource(R.drawable.ic_arrow_up)
+            }
+        }
+        sheetBehavior.addBottomSheetCallback(bottomSheetCallBack)
     }
 
     private fun setBottomSheetState(state: String) {
@@ -76,6 +93,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         when (state) {
             EXPANDED -> sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             COLLAPSED -> sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            TOGGLE -> {
+                if (sheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED)
+                    setBottomSheetState(EXPANDED)
+                else
+                    setBottomSheetState(COLLAPSED)
+            }
         }
     }
 
@@ -118,6 +141,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
 
         // Listener do botão de expansão do bottomSheet de favoritos
+        binding.bottomSheetLayout.btnFavoriteIcon.setOnClickListener {
+            setBottomSheetState(TOGGLE)
+        }
 
     }
 
@@ -133,18 +159,17 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         query?.let { viewModel.getRepoList(it) }
         binding.root.hideSoftKeyboard()
-        Log.i(TAG, "$query")
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        Log.i(TAG, "$newText")
         return false
     }
 
     companion object {
-        const val TAG = "TAG"
+        const val TAG = "MyTag"
         const val EXPANDED = "EXPANDED"
         const val COLLAPSED = "COLLAPSED"
+        const val TOGGLE = "TOGGLE"
     }
 }

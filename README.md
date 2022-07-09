@@ -37,7 +37,7 @@ Adicionei uma nova funcionalidade ao aplicativo, a possibilidade de selecionar, 
 </p>
 
 
-
+5r
 ### Mensagens
 
 Adicionei algumas mensagens para melhor orientar o usuário. A primeira delas, é uma mensagem inicial, na qual o usuário é instruído a como realizar a pesquisa pelos repositórios do GitHub de algum usuário da plataforma. A outra mensagem, é referente ao retorno recebido quando o usuário pesquisado não possui repositórios, antes, era apresentado apenas a tela em branco, agora, a mensagem esclarece que o perfil pesquisado está vazio. 

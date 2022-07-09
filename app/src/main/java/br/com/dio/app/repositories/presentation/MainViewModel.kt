@@ -1,16 +1,12 @@
 package br.com.dio.app.repositories.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import br.com.dio.app.repositories.data.model.Favorite
 import br.com.dio.app.repositories.data.model.Owner
 import br.com.dio.app.repositories.data.model.Repo
 import br.com.dio.app.repositories.data.repositories.FavoriteRepository
 import br.com.dio.app.repositories.domain.ListUserRepositoriesUseCase
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
@@ -30,9 +26,10 @@ class MainViewModel(
                     _repos.postValue(State.Loading)
                 }
                 .catch {
-                    _repos.postValue(State.Error(it))
+                    _repos.value = State.Error(it)
                 }
                 .collect {
+                    _repos.value = State.Success(it)
                     _repos.postValue(State.Success(it))
                 }
         }
@@ -46,14 +43,14 @@ class MainViewModel(
 
 
     fun getFavoriteList(): LiveData<List<Favorite>>{
-        return favoriteRepository.getAll()
+        return favoriteRepository.getAll().asLiveData()
     }
 
-    fun addFavorite(owner: Owner) {
+    fun addFavorite(owner: Owner) = viewModelScope.launch {
         favoriteRepository.insert(Favorite(userName = owner.login, userAvatar = owner.avatarURL))
     }
 
-    fun removeFavorite(favorite: Favorite) {
+    fun removeFavorite(favorite: Favorite) = viewModelScope.launch {
         favoriteRepository.delete(favorite)
     }
 

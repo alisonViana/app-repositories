@@ -30,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_favorite_title"
         android:src="@drawable/ic_arrow_up"
         android:background="@drawable/corner_shape"
-        android:backgroundTint="@color/gray_light"
+        android:foreground="?attr/actionBarItemBackground"
         />
 
     <androidx.recyclerview.widget.RecyclerView
